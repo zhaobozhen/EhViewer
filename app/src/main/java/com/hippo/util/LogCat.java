@@ -18,6 +18,7 @@ package com.hippo.util;
 
 import com.hippo.yorozuya.FileUtils;
 import com.hippo.yorozuya.IOUtils;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +35,7 @@ public final class LogCat {
         }
 
         try {
-            Process p = Runtime.getRuntime().exec("logcat -d");
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), "logcat -d");
             IOUtils.copy(p.getInputStream(), new FileOutputStream(file));
             return true;
         } catch (IOException e) {
